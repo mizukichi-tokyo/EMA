@@ -1,13 +1,19 @@
-FROM node:0.10.38
+FROM node
 
-RUN mkdir /src
 
-RUN npm install express-generator -g
+# Clean out existing application files
+RUN rm -rf /src && mkdir -p /src
 
+
+# Copy the application into the image
+COPY . /src
+
+
+# Install application dependencies
 WORKDIR /src
-ADD app/package.json /src/package.json
-RUN npm install
+RUN npm install .
 
+
+# Setup application entrypoint
 EXPOSE 3000
-
-CMD node app/bin/www
+CMD node ./bin/www

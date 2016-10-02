@@ -1,11 +1,9 @@
 web:
-  build: ./dockerfile_nodejs
+  build: ./myapp
   ports:
     - "3000:3000"
-  volumes:
-     - ./myapp:/home/myapp
   links:
-    - "db:mongo"
+    - "db"
   tty: true
 db:
   image: mongo
